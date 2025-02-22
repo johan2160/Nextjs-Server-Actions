@@ -35,23 +35,26 @@ export default function CreateGenreForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mb-8 p-4 border rounded">
-      <h2 className="text-xl font-semibold mb-2">Create New Genre</h2>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="mb-8 p-4 border rounded dark:border-gray-700 dark:bg-gray-800"
+    >
+      <h2 className="text-xl font-semibold mb-2 dark:text-gray-200">Create New Genre</h2>
       <div className="mb-2">
         <input
           type="text"
           {...register("name")}
           placeholder="Genre Name"
-          className="border p-2 w-full"
+          className="border p-2 w-full dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
         />
         {errors.name && (
-          <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+          <p className="text-red-500 text-sm mt-1 dark:text-red-400">{errors.name.message}</p>
         )}
       </div>
       <button
         type="submit"
         disabled={isSubmitting || isPending}
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
+        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 dark:bg-blue-600 dark:hover:bg-blue-700 dark:disabled:bg-gray-600"
       >
         {isSubmitting || isPending ? "Creating..." : "Create Genre"}
       </button>

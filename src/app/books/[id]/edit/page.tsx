@@ -1,13 +1,14 @@
 import EditBookForm from "@/components/book/EditBookForm";
 import prisma from "@/lib/prisma";
 
-export default async function EditBookPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function EditBookPage(
+  props: {
+    params: Promise<{ id: string }>;
+  }
+) {
+  const params = await props.params;
   const bookId = Number(params.id);
-  // Fetch the book and include its author details
+  
   const book = await prisma.book.findUnique({
     where: { id: bookId },
     include: { author: true },

@@ -51,15 +51,15 @@ export default function CreateBookForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mb-8 p-4 border rounded">
-      <h2 className="text-xl font-semibold mb-2">Create New Book</h2>
+    <form onSubmit={handleSubmit(onSubmit)} className="mb-8 p-4 border rounded dark:border-gray-700">
+      <h2 className="text-xl font-semibold mb-2 dark:text-gray-200">Create New Book</h2>
 
       <div className="mb-2">
         <input
           type="text"
           {...register("title")}
           placeholder="Book Title"
-          className="border p-2 w-full"
+          className="border p-2 w-full rounded bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 placeholder-gray-400 dark:placeholder-gray-500"
         />
         {errors.title && (
           <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
@@ -67,7 +67,10 @@ export default function CreateBookForm() {
       </div>
 
       <div className="mb-2">
-        <select {...register("authorId")} className="border p-2 w-full">
+        <select 
+          {...register("authorId")} 
+          className="border p-2 w-full rounded bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600"
+        >
           <option value="">Select an Author</option>
           {authors.map((author) => (
             <option key={author.id} value={author.id}>
@@ -84,7 +87,7 @@ export default function CreateBookForm() {
         <input
           type="date"
           {...register("publishedAt")}
-          className="border p-2 w-full"
+          className="border p-2 w-full rounded bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600"
         />
         {errors.publishedAt && (
           <p className="text-red-500 text-sm mt-1">
@@ -97,7 +100,7 @@ export default function CreateBookForm() {
         <textarea
           {...register("description")}
           placeholder="Description"
-          className="border p-2 w-full"
+          className="border p-2 w-full rounded bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 placeholder-gray-400 dark:placeholder-gray-500"
         />
         {errors.description && (
           <p className="text-red-500 text-sm mt-1">
@@ -109,7 +112,7 @@ export default function CreateBookForm() {
       <button
         type="submit"
         disabled={isSubmitting || isPending}
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
+        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400 dark:disabled:bg-gray-600"
       >
         {isSubmitting || isPending ? "Creating..." : "Create Book"}
       </button>

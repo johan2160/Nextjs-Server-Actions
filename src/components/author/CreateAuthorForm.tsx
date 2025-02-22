@@ -37,27 +37,30 @@ export default function CreateAuthorForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mb-8 p-4 border rounded">
       <h2 className="text-xl font-semibold mb-2">Create New Author</h2>
+
       <div className="mb-2">
         <input
           type="text"
           {...register("name")}
           placeholder="Author Name"
-          className="border p-2 w-full"
+          className="border p-2 w-full bg-gray-800 text-white border-gray-600 placeholder-gray-400"
         />
         {errors.name && (
           <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
         )}
       </div>
+
       <div className="mb-2">
         <textarea
           {...register("bio")}
           placeholder="Author Bio"
-          className="border p-2 w-full"
+          className="border p-2 w-full bg-gray-800 text-white border-gray-600 placeholder-gray-400"
         />
         {errors.bio && (
           <p className="text-red-500 text-sm mt-1">{errors.bio.message}</p>
         )}
       </div>
+
       <button
         type="submit"
         disabled={isSubmitting || isPending}
@@ -66,5 +69,6 @@ export default function CreateAuthorForm() {
         {isSubmitting || isPending ? "Creating..." : "Create Author"}
       </button>
     </form>
-  );
+);
+
 }

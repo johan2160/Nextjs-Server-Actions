@@ -79,7 +79,7 @@ export default function EditBookForm({ book }: EditBookFormProps) {
         <input
           type="text"
           {...register("title")}
-          className="border p-2 w-full"
+          className="border p-2 w-full bg-gray-800 text-white border-gray-600"
         />
         {errors.title && (
           <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
@@ -91,7 +91,7 @@ export default function EditBookForm({ book }: EditBookFormProps) {
         <select
           {...register("authorId")}
           disabled={!authors}
-          className="border p-2 w-full"
+          className="border p-2 w-full bg-gray-800 text-white border-gray-600"
         >
           <option value={book.author.id}>{book.author.name}</option>
           {authors
@@ -112,7 +112,7 @@ export default function EditBookForm({ book }: EditBookFormProps) {
         <input
           type="date"
           {...register("publishedAt")}
-          className="border p-2 w-full"
+          className="border p-2 w-full bg-gray-800 text-white border-gray-600"
         />
         {errors.publishedAt && (
           <p className="text-red-500 text-sm mt-1">
@@ -123,7 +123,10 @@ export default function EditBookForm({ book }: EditBookFormProps) {
 
       <div className="mb-2">
         <label className="block font-medium mb-1">Description:</label>
-        <textarea {...register("description")} className="border p-2 w-full" />
+        <textarea
+          {...register("description")}
+          className="border p-2 w-full bg-gray-800 text-white border-gray-600"
+        />
         {errors.description && (
           <p className="text-red-500 text-sm mt-1">
             {errors.description.message}
@@ -139,5 +142,6 @@ export default function EditBookForm({ book }: EditBookFormProps) {
         {isSubmitting || isPending ? "Updating..." : "Update Book"}
       </button>
     </form>
-  );
+);
+
 }

@@ -1,11 +1,12 @@
 import EditAuthorForm from "@/components/author/EditAuthorForm";
 import prisma from "@/lib/prisma";
 
-export default async function EditAuthorPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function EditAuthorPage(
+  props: {
+    params: Promise<{ id: string }>;
+  }
+) {
+  const params = await props.params;
   const authorId = Number(params.id);
   const author = await prisma.author.findUnique({
     where: { id: authorId },
