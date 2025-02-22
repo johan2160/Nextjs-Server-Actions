@@ -4,17 +4,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { updateBookSchema } from "@/schemas/book";
 import type { z } from "zod";
 import { updateBook } from "@/actions/bookActions";
+import useAuthors from "@/hooks/useAuthors"; 
 
 type FormData = z.infer<typeof updateBookSchema>;
-
-interface Author {
-  id: number;
-  name: string;
-}
 
 interface Book {
   id: number;
@@ -34,7 +29,8 @@ interface EditBookFormProps {
 export default function EditBookForm({ book }: EditBookFormProps) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  const [authors, setAuthors] = useState<Author[]>([]);
+  const { authors, isLoading, error } = useAuthors();
+
   const {
     register,
     handleSubmit,
@@ -49,15 +45,6 @@ export default function EditBookForm({ book }: EditBookFormProps) {
       description: book.description || "",
     },
   });
-
-  useEffect(() => {
-    async function fetchAuthors() {
-      const res = await fetch("/api/authors");
-      const data = await res.json();
-      setAuthors(data);
-    }
-    fetchAuthors();
-  }, []);
 
   async function onSubmit(data: FormData) {
     try {
@@ -90,7 +77,7 @@ export default function EditBookForm({ book }: EditBookFormProps) {
         <label className="block font-medium mb-1">Author:</label>
         <select
           {...register("authorId")}
-          disabled={!authors}
+          disabled={isLoading || !!error}
           className="border p-2 w-full bg-gray-800 text-white border-gray-600"
         >
           <option value={book.author.id}>{book.author.name}</option>
@@ -104,6 +91,11 @@ export default function EditBookForm({ book }: EditBookFormProps) {
         </select>
         {errors.authorId && (
           <p className="text-red-500 text-sm mt-1">{errors.authorId.message}</p>
+        )}
+        {error && (
+          <p className="text-red-500 text-sm mt-1">
+            Error fetching authors: {error.message}
+          </p>
         )}
       </div>
 
@@ -142,6 +134,5 @@ export default function EditBookForm({ book }: EditBookFormProps) {
         {isSubmitting || isPending ? "Updating..." : "Update Book"}
       </button>
     </form>
-);
-
+  );
 }

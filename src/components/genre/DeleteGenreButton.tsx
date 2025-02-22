@@ -1,4 +1,3 @@
-// src/components/DeleteGenreButton.tsx
 "use client";
 
 import { deleteGenre } from "@/actions/genreActions";
